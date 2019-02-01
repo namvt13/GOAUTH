@@ -22,12 +22,20 @@ API Lists:
 Result images (Postman):
 
 - Register
+  ![register.png](images/register.png)
 - Login
+  ![login.png](images/login.png)
 - Logout
+  ![logout.png](images/logout.png)
+  ![logout_after.png](images/logout_after.png)
 - Refresh
+  ![refresh.png](images/refresh.png)
 - Current
+  ![current.png](images/current.png)
 - All users
+  ![search_all.png](images/search_all.png)
 - Search user
+  ![search.png](images/search.png)
 
 Packages used:
 
