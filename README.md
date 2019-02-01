@@ -7,7 +7,7 @@ API Lists:
 - http://localhost:4040/user/register
   Register new user, then logged in
 - http://localhost:4040/user/login
-  Login user, uses session-based authentication
+  Login user, uses session-based authentication (120 seconds expiry time)
 - http://localhost:4040/user/logout
   Logout
 - http://localhost:4040/user/refresh
