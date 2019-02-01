@@ -59,7 +59,7 @@ func (uc *UserCollection) GetByUsername(username string) (goauthpkg.UserObj, err
 }
 
 // GetAllUser get all user object from mongodb
-func (uc *UserCollection) GetAllUser() (*[]goauthpkg.UserObj, error) {
+func (uc *UserCollection) GetAllUser() (*[]string, error) {
 	ctx, cancelFunc := CtxCreator(5)
 	defer cancelFunc()
 
@@ -70,7 +70,7 @@ func (uc *UserCollection) GetAllUser() (*[]goauthpkg.UserObj, error) {
 		return nil, err
 	}
 
-	userObjArr := []goauthpkg.UserObj{}
+	usernameArr := []string{}
 
 	for cursor.Next(ctx) {
 		var userObj goauthpkg.UserObj
@@ -78,10 +78,10 @@ func (uc *UserCollection) GetAllUser() (*[]goauthpkg.UserObj, error) {
 		if err != nil {
 			return nil, err
 		}
-		userObjArr = append(userObjArr, userObj)
+		usernameArr = append(usernameArr, userObj.Username)
 	}
 
-	return &userObjArr, cursor.Err()
+	return &usernameArr, cursor.Err()
 }
 
 // Login let user log into server

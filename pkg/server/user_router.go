@@ -93,7 +93,7 @@ func (ur *userRouter) getCurrentUserHandler(w http.ResponseWriter, r *http.Reque
 	}
 
 	// Send back user to client
-	JSON(w, http.StatusOK, userObj)
+	JSON(w, http.StatusOK, userObj.Username)
 }
 
 // getUserHandler will process request coming from GET "/{username}"
@@ -129,12 +129,12 @@ func (ur *userRouter) getUserHandler(w http.ResponseWriter, r *http.Request) {
 
 // getAllUserHandler handles all request coming from "/user/search/all" path
 func (ur userRouter) getAllUserHandler(w http.ResponseWriter, r *http.Request) {
-	userObjArr, err := ur.UserCollection.GetAllUser()
+	usernameArr, err := ur.UserCollection.GetAllUser()
 	if err != nil {
 		Error(w, http.StatusInternalServerError, "Can't get all users")
 	}
 
-	JSON(w, http.StatusOK, userObjArr)
+	JSON(w, http.StatusOK, usernameArr)
 }
 
 func decodeCredential(r *http.Request) (goauthpkg.Credential, error) {
@@ -176,7 +176,7 @@ func (ur *userRouter) loginHandler(w http.ResponseWriter, r *http.Request) {
 	// Set cookie
 	ur.UserSession.SetCookie(w, token)
 
-	JSON(w, http.StatusOK, userObj)
+	JSON(w, http.StatusOK, userObj.Username)
 }
 
 // logoutHandler handles all request to "/logout"

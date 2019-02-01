@@ -14,7 +14,7 @@ type UserCollection interface {
 	// Create user in the database
 	CreateUser(u *UserObj) error
 	GetByUsername(username string) (UserObj, error)
-	GetAllUser() (*[]UserObj, error)
+	GetAllUser() (*[]string, error)
 	Login(c Credential) (UserObj, error)
 }
 

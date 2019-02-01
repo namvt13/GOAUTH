@@ -1,7 +1,6 @@
 package goauthredis
 
 import (
-	goauthpkg "chotot/go_auth/pkg"
 	"errors"
 	"log"
 	"net/http"
@@ -78,14 +77,14 @@ func (rc *RedisClient) SetCookie(w http.ResponseWriter, token string) {
 const redisUserListKey = "go_auth_users"
 
 // SaveUsers save users to Redis
-func (rc *RedisClient) SaveUsers(userObjArr *[]goauthpkg.UserObj) error {
+func (rc *RedisClient) SaveUsers(usernameArr *[]string) error {
 	delRes := rc.client.Del(redisUserListKey)
 	if err := delRes.Err(); err != nil {
 		return err
 	}
 
-	for i := 0; i < len(*userObjArr); i++ {
-		res := rc.client.SAdd(redisUserListKey, (*userObjArr)[i].Username)
+	for i := 0; i < len(*usernameArr); i++ {
+		res := rc.client.SAdd(redisUserListKey, (*usernameArr)[i])
 		if err := res.Err(); err != nil {
 			return err
 		}
